@@ -4,8 +4,17 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import { proxy, useProxy } from 'valtio'
 
+const state = proxy({
+    current: null,
+    items: {
+        heart: "#FFF27A",
+        house: "#93CCC5",
+    }
+})
+
 function Arch(props) {
     const group = useRef()
+    const snap = useProxy(state)
     const { nodes, materials } = useGLTF('/arch.glb')
     return (
         <group ref={group} {...props} dispose={null}>
@@ -15,7 +24,7 @@ function Arch(props) {
                     receiveShadow
                     geometry={nodes.arch_1.geometry}
                 >
-                    <meshStandardMaterial color='orange' />
+                    <meshStandardMaterial color={snap.items.house} />
                 </mesh>
 
                 <mesh
@@ -23,7 +32,7 @@ function Arch(props) {
                     receiveShadow
                     geometry={nodes.arch_2.geometry}
                 >
-                    <meshStandardMaterial color='green' />
+                    <meshStandardMaterial color={snap.items.heart} />
                 </mesh>
             </group>
         </group>
