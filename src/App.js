@@ -1,7 +1,7 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 
-import { useGLTF, OrbitControls } from '@react-three/drei'
+import { ContactShadows, useGLTF, OrbitControls, Environment } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful"
 import { proxy, useSnapshot } from 'valtio'
 
@@ -37,20 +37,20 @@ function Arch(props) {
                 onPointerMissed={(e) => { state.current = null }}
             >
                 <mesh
-                    castShadow
-                    receiveShadow
+                    // castShadow
+                    // receiveShadow
                     geometry={nodes.arch_1.geometry}
                 >
-                    <meshStandardMaterial name="house" color={snap.items.house} />
+                    <meshPhongMaterial name="house" color={snap.items.house} />
                 </mesh>
 
 
                 <mesh
-                    castShadow
-                    receiveShadow
+                    // castShadow
+                    // receiveShadow
                     geometry={nodes.arch_2.geometry}
                 >
-                    <meshStandardMaterial name="heart" color={snap.items.heart} />
+                    <meshPhongMaterial name="heart" color={snap.items.heart} />
                 </mesh>
             </group>
         </group>
@@ -77,8 +77,19 @@ export default function App() {
             <Picker />
             <Canvas>
                 <ambientLight intensity={0.5} />
+                <spotLight
+                    intensity={0.6}
+                    position={[2, 10, 1]}
+                    angle={0.2}
+                    penumbra={1}
+                    // shadow-mapSize-width={2048}
+                    // shadow-mapSize-height={2048}
+                    // castShadow
+                />
                 <Suspense fallback={null}>
                     <Arch />
+                    {/* <Environment files="royal_esplanade_1k.hdr"/> */}
+                    <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.4, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={1}/>
                 </Suspense>
                 <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
             </Canvas>
