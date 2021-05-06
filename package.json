@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@react-three/drei": "^4.3.3",
     "@react-three/fiber": "^6.0.19",
     "drei": "2.2.12",
     "react": "17.0.1",
