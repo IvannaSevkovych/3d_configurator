@@ -1,7 +1,8 @@
 import React, { useRef, useState, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, OrbitControls } from '@react-three/drei'
+import { proxy, useProxy } from 'valtio'
 
 function Arch(props) {
     const group = useRef()
@@ -36,6 +37,7 @@ export default function App() {
             <Suspense fallback={null}>
                 <Arch />
             </Suspense>
+            <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
         </Canvas>
     )
 }
