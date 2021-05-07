@@ -48,72 +48,60 @@ function Mini(props) {
                 position={[0.53, 0.16, 0.73]}
                 rotation={[0, 0, -Math.PI / 2]}
                 scale={[0.02, 0.02, 0.02]}>
-                <mesh castShadow receiveShadow geometry={nodes.mini.geometry} material={materials.wheels} />
+                <mesh geometry={nodes.mini.geometry} material={materials.wheels} />
                 <mesh
                     material-color={snap.items.carpaint}
-                    castShadow
-                    receiveShadow
                     geometry={nodes.mini_1.geometry}
                     material={materials.carpaint}
                 />
-                <mesh castShadow receiveShadow geometry={nodes.mini_2.geometry} material={materials.roof} />
+                <mesh geometry={nodes.mini_2.geometry} material={materials.roof} />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.plastic}
                     geometry={nodes.mini_3.geometry}
                     material={materials.plastic}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.glass}
                     geometry={nodes.mini_4.geometry}
                     material={materials.glass}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.carpaint_dark}
                     geometry={nodes.mini_5.geometry}
                     material={materials.carpaint_dark}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.carpaint_light}
                     geometry={nodes.mini_6.geometry}
                     material={materials.carpaint_light}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.tyres}
                     geometry={nodes.mini_7.geometry}
                     material={materials.tyres}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.headlight}
                     geometry={nodes.mini_8.geometry}
                     material={materials.headlight}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.chrome}
                     geometry={nodes.mini_9.geometry}
                     material={materials.chrome}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.backlights}
                     geometry={nodes.mini_10.geometry}
                     material={materials.backlights}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.plates}
                     geometry={nodes.mini_11.geometry}
                     material={materials.plates}
                 />
                 <mesh
-                    castShadow
-                    receiveShadow
+                    material-color={snap.items.mirror}
                     geometry={nodes.mini_12.geometry}
                     material={materials.mirror}
                 />
