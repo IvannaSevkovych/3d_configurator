@@ -9,15 +9,24 @@ import { proxy, useSnapshot } from 'valtio'
 const state = proxy({
     current: null,
     items: {
-        heart: "#FFF27A",
-        house: "#93CCC5",
+        carpaint: "#FFF27A",
+        plastic: "#040404",
+        glass: "#ffffff",
+        carpaint_dark: "#040404",
+        carpaint_light: "#ffffff",
+        tyres: "#040404",
+        headlight: "#ffffff",
+        chrome: "#858585",
+        backlights: "#880D0D",
+        plates: "#ffffff",
+        mirror: "#858585",
     }
 })
 
-function Arch(props) {
+function Mini(props) {
     const group = useRef()
     const snap = useSnapshot(state)
-    const { nodes, materials } = useGLTF('/arch.glb')
+    const { nodes, materials } = useGLTF('/Mini_cooper_opt_attached_collapsed_draco.glb')
     const [hovered, set] = useState(null)
 
     useEffect(() => {
@@ -30,28 +39,84 @@ function Arch(props) {
     return (
         <group ref={group} {...props} dispose={null}>
             <group
-                position={[0, -0.04, 0]}
+                // Events
                 onPointerOver={(e) => { e.stopPropagation(), set(e.object.material.name) }}
                 onPointerOut={(e) => { e.intersections.length === 0 && set(null) }}
                 onPointerDown={(e) => { e.stopPropagation, state.current = e.object.material.name }}
                 onPointerMissed={(e) => { state.current = null }}
-            >
-                <mesh
-                    // castShadow
-                    // receiveShadow
-                    geometry={nodes.arch_1.geometry}
-                >
-                    <meshPhongMaterial name="house" color={snap.items.house} />
-                </mesh>
 
-
+                position={[0.53, 0.16, 0.73]}
+                rotation={[0, 0, -Math.PI / 2]}
+                scale={[0.02, 0.02, 0.02]}>
+                <mesh castShadow receiveShadow geometry={nodes.mini.geometry} material={materials.wheels} />
                 <mesh
-                    // castShadow
-                    // receiveShadow
-                    geometry={nodes.arch_2.geometry}
-                >
-                    <meshPhongMaterial name="heart" color={snap.items.heart} />
-                </mesh>
+                    material-color={snap.items.carpaint}
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_1.geometry}
+                    material={materials.carpaint}
+                />
+                <mesh castShadow receiveShadow geometry={nodes.mini_2.geometry} material={materials.roof} />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_3.geometry}
+                    material={materials.plastic}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_4.geometry}
+                    material={materials.glass}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_5.geometry}
+                    material={materials.carpaint_dark}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_6.geometry}
+                    material={materials.carpaint_light}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_7.geometry}
+                    material={materials.tyres}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_8.geometry}
+                    material={materials.headlight}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_9.geometry}
+                    material={materials.chrome}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_10.geometry}
+                    material={materials.backlights}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_11.geometry}
+                    material={materials.plates}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.mini_12.geometry}
+                    material={materials.mirror}
+                />
             </group>
         </group>
     )
@@ -76,20 +141,20 @@ export default function App() {
         <>
             <Picker />
             <Canvas>
-                <ambientLight intensity={0.5} />
+                <ambientLight intensity={0.1} />
                 <spotLight
-                    intensity={0.6}
+                    intensity={0.1}
                     position={[2, 10, 1]}
                     angle={0.2}
                     penumbra={1}
-                    // shadow-mapSize-width={2048}
-                    // shadow-mapSize-height={2048}
-                    // castShadow
+                // shadow-mapSize-width={2048}
+                // shadow-mapSize-height={2048}
+                // castShadow
                 />
                 <Suspense fallback={null}>
-                    <Arch />
-                    {/* <Environment files="royal_esplanade_1k.hdr"/> */}
-                    <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.4, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={1}/>
+                    <Mini />
+                    <Environment files="royal_esplanade_1k.hdr" />
+                    <ContactShadows rotation-x={Math.PI / 2} position={[0, -0.4, 0]} opacity={0.25} width={10} height={10} blur={1.5} far={1} />
                 </Suspense>
                 <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
             </Canvas>
