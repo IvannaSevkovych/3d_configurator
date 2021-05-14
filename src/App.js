@@ -8,6 +8,9 @@ import { proxy, useSnapshot } from 'valtio'
 
 const state = proxy({
     current: null,
+    visibility: {
+        carpaint_dark: false,
+    },
     items: {
         carpaint: "#FFF27A",
         plastic: "#040404",
@@ -27,6 +30,12 @@ function Mini(props) {
     const group = useRef()
     const snap = useSnapshot(state)
     const { nodes, materials } = useGLTF('/Mini_cooper_opt_attached_collapsed_draco.glb')
+
+    // Make materials one-sided
+    Object.keys(materials).forEach( (key) => {
+        materials[key].side = 0
+    })
+
     const [hovered, set] = useState(null)
 
     useEffect(() => {
@@ -48,13 +57,21 @@ function Mini(props) {
                 position={[0.53, 0.16, 0.73]}
                 rotation={[0, 0, -Math.PI / 2]}
                 scale={[0.02, 0.02, 0.02]}>
-                <mesh geometry={nodes.mini.geometry} material={materials.wheels} />
+                <mesh
+                    visible={!snap.visibility.carpaint_dark}
+                    geometry={nodes.mini.geometry}
+                    material={materials.wheels}
+                />
                 <mesh
                     material-color={snap.items.carpaint}
                     geometry={nodes.mini_1.geometry}
                     material={materials.carpaint}
                 />
-                <mesh geometry={nodes.mini_2.geometry} material={materials.roof} />
+                <mesh
+                    visible={snap.visibility.carpaint_dark}
+                    geometry={nodes.mini_2.geometry}
+                    material={materials.roof}
+                />
                 <mesh
                     material-color={snap.items.plastic}
                     geometry={nodes.mini_3.geometry}
@@ -124,6 +141,21 @@ function Picker() {
     )
 }
 
+function RoofToggler() {
+    const snap = useSnapshot(state)
+    return (
+        <div
+            className="roof"
+            onPointerDown={(e) => {
+                e.stopPropagation;
+                state.visibility.carpaint_dark = !snap.visibility.carpaint_dark;
+            }}
+        >
+            <h2>Roof</h2>
+        </div>
+    )
+}
+
 export default function App() {
     return (
         <>
@@ -146,6 +178,7 @@ export default function App() {
                 </Suspense>
                 <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
             </Canvas>
+            <RoofToggler />
         </>
     )
 }

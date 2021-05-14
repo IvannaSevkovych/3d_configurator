@@ -34,3 +34,13 @@ h1 {
     width: 90px !important;
     height: 90px !important;
 }
+
+.roof {
+    position: absolute !important;
+    top: 250px;
+    left: 70px;
+    border: 2px solid black;
+    width: 90px !important;
+    height: 90px !important;
+    background-color: grey;
+}
