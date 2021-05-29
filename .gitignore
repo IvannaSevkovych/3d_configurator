@@ -46,3 +46,6 @@ jspm_packages/
 pnpm-lock.yaml
 
 dist
+
+# Local Netlify folder
+.netlify

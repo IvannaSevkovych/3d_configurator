@@ -35,12 +35,19 @@ h1 {
     height: 90px !important;
 }
 
-.roof {
+.xzibit {
+    display: flex;
+    flex-direction: column;
     position: absolute !important;
     top: 250px;
     left: 70px;
-    border: 2px solid black;
-    width: 90px !important;
-    height: 90px !important;
-    background-color: grey;
+}
+.xzibit h2 {
+    white-space: nowrap;
+    font-size: 48px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+.xzibit img {
+    width: 50%;
 }
