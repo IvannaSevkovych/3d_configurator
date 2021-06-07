@@ -56,7 +56,7 @@ function Mini(props) {
                 onPointerDown={(e) => { e.stopPropagation, state.current = e.object.material.name }}
                 onPointerMissed={(e) => { state.current = null }}
 
-                position={[-0.01, -0.04, -0.1]} rotation={[-Math.PI, 0, -Math.PI]}
+                position={[-0.01, -0.04, -0.1]} rotation={[0, -Math.PI*0.85, 0]}
             >
 
                 <mesh
@@ -81,19 +81,25 @@ function Mini(props) {
                 />
                 <mesh
                     geometry={nodes.Mesh001_4.geometry}
-                    material={materials.chrome}
-                    material-color={snap.items.chrome}
-                />
+                    // material={materials.chrome}
+                    // material-color={snap.items.chrome}
+                    >
+                    <meshStandardMaterial metalness={1} roughness={0} specular={1} color={materials.chrome}/>
+                </mesh>
                 <mesh
                     geometry={nodes.Mesh001_5.geometry}
-                    material={materials.glass}
-                    material-color={snap.items.glass}
-                />
+                    // material={materials.glass}
+                    // material-color={snap.items.glass}
+                    >
+                    <meshStandardMaterial metalness={1} roughness={0} specular={1} color={materials.glass}/>
+                </mesh>
                 <mesh
                     geometry={nodes.Mesh001_6.geometry}
-                    material={materials.headlight}
-                    material-color={snap.items.headlight}
-                />
+                    // material={materials.headlight}
+                    // material-color={snap.items.headlight}
+                    >
+                    <meshStandardMaterial metalness={1} roughness={0} specular={1} color={materials.headlight}/>
+                    </mesh>
                 <mesh
                     geometry={nodes.Mesh001_7.geometry}
                     material={materials.mirror}
@@ -154,24 +160,34 @@ function Picker() {
 function RoofToggler() {
     const snap = useSnapshot(state)
     return (
-        <div
-            className="xzibit"
-            onPointerDown={(e) => {
-                e.stopPropagation;
-                state.visibility.wheels = !snap.visibility.wheels;
-            }}
-        >
-            <img src="/xzibit.jpg"/>
-            <h2>Pimp my ride!</h2>
-        </div>
+        <>
+            <div className="flip-wrapper">
+                <img
+                    src="/xzibit.jpg"
+                    style={{ opacity: state.visibility.wheels ? "0" : "1" }}
+                />
+                <div className="flip">
+                    <a onPointerDown={(e) => {
+                                e.stopPropagation;
+                                state.visibility.wheels = !snap.visibility.wheels;
+                            }}>
+                        <div
+                            className="front"
+                        >
+                            Pimp my ride!
+                        </div>
+                        <div class="back">Pimp my ride!</div>
+                    </a>
+                </div>
+            </div>
+        </>
     )
 }
 
 export default function App() {
     return (
         <>
-            <Picker />
-            <Canvas>
+            <Canvas camera={{ position: [0, 0.5, 3] }}>
                 <ambientLight intensity={0.1} />
                 <spotLight
                     intensity={0.1}
@@ -187,6 +203,7 @@ export default function App() {
                 <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
             </Canvas>
             <RoofToggler />
+            <Picker />
         </>
     )
 }
