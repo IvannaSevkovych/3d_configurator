@@ -5,15 +5,16 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@react-three/drei": "^4.3.3",
     "@react-three/fiber": "^6.0.19",
     "drei": "2.2.12",
     "react": "17.0.1",
-    "react-colorful": "4.4.4",
+    "react-colorful": "^4.4.4",
     "react-dom": "17.0.1",
     "react-scripts": "4.0.1",
     "react-three-fiber": "5.3.10",
     "three": "^0.123.0",
-    "valtio": "0.4.8"
+    "valtio": "^1.0.4"
   },
   "devDependencies": {
     "typescript": "4.1.3"
